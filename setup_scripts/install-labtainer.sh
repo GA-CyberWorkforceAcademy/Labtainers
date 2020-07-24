@@ -40,18 +40,18 @@ if [[ result -ne 0 ]];then
    here=`pwd`
    cat <<EOT >>$target
    if [[ ":\$PATH:" != *":./bin:"* ]]; then 
-       export PATH="\${PATH}:./bin:$here/trunk/scripts/designer/bin"
-       export LABTAINER_DIR=$pwd/trunk
+       export PATH="\${PATH}:./bin:../scripts/designer/bin"
+       export LABTAINER_DIR=$pwd
    fi
 EOT
 fi
 
-if [ ! -h labtainer-student ]; then ln -s trunk/scripts/labtainer-student; fi
-if [ ! -h labtainer-instructor ]; then ln -s trunk/scripts/labtainer-instructor; fi
+if [ ! -h labtainer-student ]; then ln -s ../scripts/labtainer-student; fi
+if [ ! -h labtainer-instructor ]; then ln -s ../scripts/labtainer-instructor; fi
 # add link to update script
-full=`realpath trunk/setup_scripts/update-labtainer.sh`
-ln -sf $full trunk/scripts/labtainer-student/bin/update-labtainer.sh
-cd trunk/setup_scripts
+full=`realpath ../setup_scripts/update-labtainer.sh`
+ln -sf $full ../scripts/labtainer-student/bin/update-labtainer.sh
+cd ../setup_scripts
 found_distrib=`cat /etc/*-release | grep "^DISTRIB_ID" | awk -F "=" '{print $2}'`
 if [[ -z "$1" ]]; then
     if [[ -z "$found_distrib" ]]; then
@@ -99,7 +99,7 @@ if [[ "$RESULT" -eq 0 ]]; then
 EONG
     sudo ./dns-add.py
     ./getinfo.py
-    sudo reboot
+#    sudo reboot
 else
     echo "There was a problem with the installation."
 fi
