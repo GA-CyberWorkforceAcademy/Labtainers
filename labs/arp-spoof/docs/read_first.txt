@@ -1,5 +1,5 @@
 The lab manual is at 
-   file://LAB_DOCS/arp-spoof.pdf
+   https://ga-cyberworkforceacademy.github.io/GTA-Labs/arp-spoof
 
 You may open these by right clicking
 and select "Open Link".

@@ -1,5 +1,5 @@
 The lab manual is at 
-   file://LAB_DOCS/nix-commands.pdf
+   https://ga-cyberworkforceacademy.github.io/GTA-Labs/nix-commands
 
 You may open those files by right clicking
 and select "Open Link".
