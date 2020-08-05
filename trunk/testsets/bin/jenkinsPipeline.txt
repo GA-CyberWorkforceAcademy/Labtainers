@@ -1,0 +1,36 @@
+def repo="/home/mike/git/Labtainers"
+
+pipeline {
+   agent any
+   environment{
+    LABTAINER_DIR = "${env.WORKSPACE}/Labtainers"
+   }
+   stages {
+  
+      stage('buildlabs'){
+          steps{
+              sh "${repo}/distrib/cloneOrPull.sh"
+              dir('Labtainers/distrib'){
+                  sh "./publish.py -q"
+              }
+          }
+      }
+      stage{'makedist'){
+          steps{
+              dir('Labtainers/distrib'){
+                  sh "./mkdist.sh"
+              }
+              dir('Labtainers/distrib'){
+                  sh "./mk-devel-dist.sh"
+              }
+          }
+      }
+      stage('smoketest'){
+          steps{
+              dir('Labtainers/testsets/bin/'){
+                  sh "./testVMs.sh"
+              }
+          }
+      }
+   }
+}

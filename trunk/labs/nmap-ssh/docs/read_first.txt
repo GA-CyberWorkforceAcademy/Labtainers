@@ -1,0 +1,6 @@
+The lab manual is at 
+   https://ga-cyberworkforceacademy.github.io/GTA-Labs/nmap-ssh
+
+You may open the manual by right clicking
+and select "Open Link".
+

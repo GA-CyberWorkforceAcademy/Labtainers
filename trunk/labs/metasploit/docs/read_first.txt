@@ -1,0 +1,7 @@
+The lab manual is at 
+   https://ga-cyberworkforceacademy.github.io/GTA-Labs/metasploit
+
+
+You may the manual by right clicking
+and select "Open Link".
+

@@ -1,0 +1,9 @@
+\BOOKMARK [1][-]{section.1}{Overview}{}% 1
+\BOOKMARK [1][-]{section.2}{Lab Environment}{}% 2
+\BOOKMARK [1][-]{section.3}{Network Configuration}{}% 3
+\BOOKMARK [1][-]{section.4}{Lab Tasks}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Internal Routing}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Routing to the Internet}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.3}{Use of Network Address Translation \(NAT\)}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.4}{IP forwarding for web traffic}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{Submission}{}% 9
