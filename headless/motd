@@ -1,7 +1,0 @@
-===================================================================
-= Labtainers Docker container & VNC                               =
-===================================================================
-
-To start labs:
- - cd ~/labtainer/labtainer-student
- - labtainer [labname]

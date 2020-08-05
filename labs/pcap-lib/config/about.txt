@@ -1,1 +1,0 @@
-Use PCAP library functions to develop programs for analysis of unknown traffic.

@@ -1,1 +1,0 @@
-Check results.config - result with 3 tokens must be of LINE_COUNT type

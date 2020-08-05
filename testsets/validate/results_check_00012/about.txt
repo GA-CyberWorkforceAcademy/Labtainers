@@ -1,1 +1,0 @@
-Check results.config - on a multiple containers lab, must have a container name -- see other entry in results.config

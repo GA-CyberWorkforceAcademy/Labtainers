@@ -1,1 +1,0 @@
-Check results.config - PARAM field_type on a non-stdin file not allowed

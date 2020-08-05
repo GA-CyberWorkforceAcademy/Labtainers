@@ -1,1 +1,0 @@
-Remote DNS cache poisoning attack, aka Kaminsky DNS attack.

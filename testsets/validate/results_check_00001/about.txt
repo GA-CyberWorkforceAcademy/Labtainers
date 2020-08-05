@@ -1,1 +1,0 @@
-Check results.config - results missing the '=' character

@@ -1,4 +1,0 @@
-#
-# make timestamped copies of the dd output files
-#
-/bin/dd starts:of=

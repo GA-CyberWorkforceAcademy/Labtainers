@@ -1,1 +1,0 @@
-Check goals.config - goals missing the '=' character

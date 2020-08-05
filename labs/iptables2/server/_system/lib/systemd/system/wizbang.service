@@ -1,9 +1,0 @@
-[Unit]
-Description=wizbang
-
-[Service]
-ExecStart=/home/ubuntu/server
-
-[Install]
-WantedBy=multi-user.target
-Alias=wizbang.service

@@ -1,2 +1,0 @@
-#!/bin/bash
-/usr/bin/set_default_gw.sh 10.10.0.101

@@ -1,1 +1,0 @@
-Check goals.config - invalid format/type of matchany for a '3' tokens goals

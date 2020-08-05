@@ -1,1 +1,0 @@
-Check goals.config - invalid goals - matchacross type can't use answer=<string>

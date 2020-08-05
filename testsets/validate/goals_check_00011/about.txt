@@ -1,1 +1,0 @@
-Check goals.config - goals referencing missing parameter

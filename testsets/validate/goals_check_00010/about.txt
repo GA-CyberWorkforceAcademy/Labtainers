@@ -1,1 +1,0 @@
-Check goals.config - invalid format - type count_greater goal missing count value

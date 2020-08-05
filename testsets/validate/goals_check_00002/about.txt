@@ -1,1 +1,0 @@
-Check goals.config - invalid character in goals key (has the '@' character)

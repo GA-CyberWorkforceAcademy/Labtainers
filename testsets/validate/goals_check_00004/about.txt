@@ -1,1 +1,0 @@
-Check goals.config - too few 'tokens' separated by ' : ' - invalid format

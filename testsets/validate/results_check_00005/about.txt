@@ -1,1 +1,0 @@
-Check results.config - invalid line type
