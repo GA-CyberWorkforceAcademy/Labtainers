@@ -36,7 +36,7 @@ def getMemoryInGB():
             print("Invalid memory size string")
             exit(1)
         MemSizeGB = MemSizeMB / 1024
-        MemSizeGB = float("%.2f" % MemSizeGB)
+        MemSizeGB = float(MemSizeGB)
         #print "MemSize is (%s) in MB" % MemSizeMB
         #print "MemSize is (%s) in GB" % MemSizeGB
 
@@ -67,22 +67,20 @@ def main():
     numprocessor = getNumProcessor()
     memoryinGB = getMemoryInGB()
     print("Linux host resources:")
-    print("Processors: %d") % numprocessor
-    print("RAM: %.2f GB") % memoryinGB
     print("")
-    if numprocessor == 1:
-        print("Labtainers will perform better with two processors allocated to the Linux host.")
-    if memoryinGB < 1.8:
-        print("Labtainers may perform better with at least 2 GB of RAM allocated to the Linux host.")
-    if numprocessor == 1 or memoryinGB < 1.8:
-        user_input=None
-        user_input=raw_input("Would like to shutdown the host so you can allocate more resources? (yes/no)\n")
-        user_input=user_input.strip().lower()
-        #print "user_input (%s)" % user_input
-        if user_input == "yes":
-            command="sudo shutdown -h now"
-            #print "command is (%s)" % command
-            os.system(command)
+    # if numprocessor == 1:
+    #     print("Labtainers will perform better with two processors allocated to the Linux host.")
+    # if memoryinGB < 1.8:
+    #     print("Labtainers may perform better with at least 2 GB of RAM allocated to the Linux host.")
+    # if numprocessor == 1 or memoryinGB < 1.8:
+    #     user_input=None
+    #     user_input=raw_input("Would like to shutdown the host so you can allocate more resources? (yes/no)\n")
+    #     user_input=user_input.strip().lower()
+    #     #print "user_input (%s)" % user_input
+    #     if user_input == "yes":
+    #         command="sudo shutdown -h now"
+    #         #print "command is (%s)" % command
+    #        os.system(command)
 
     return 0
 
