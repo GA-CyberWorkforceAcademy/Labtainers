@@ -39,7 +39,6 @@ import json
 from hashlib import md5
 import os
 import sys
-import requests
 import zipfile
 import time
 import glob
@@ -57,11 +56,11 @@ import LabCount
 MYHOME=os.getenv('HOME')
 logger = InstructorLogging.InstructorLogging("/tmp/instructor.log")
 
-def upload_student_grade((lab_id_name, gradesjsonname)):
-	url = 'http://localhost:8000'
-	file = '%s.grades.json' % lab_id_name
-	with open('{}'.format(gradesjsonname), 'rb') as data:
-		requests.put(url + "/{}".format(file), data=data)
+# def upload_student_grade(lab_id_name, gradesjsonname):
+# 	url = 'http://localhost:8000'
+# 	file = '%s.grades.json' % lab_id_name
+# 	with open('{}'.format(gradesjsonname), 'rb') as data:
+# 		requests.put(url + "/{}".format(file), data=data)
 
 def newStudentJson():
         student_json = {}
@@ -450,7 +449,7 @@ def main():
     gradesjsonoutput.write(jsondumpsoutput)
     gradesjsonoutput.write('\n')
     gradesjsonoutput.close()
-    upload_student_grade(lab_id_name, gradesjsonname)
+    # upload_student_grade(lab_id_name, gradesjsonname)
     
     if do_unique:
         # Output <labname>.unique.json
@@ -465,7 +464,7 @@ def main():
         uniquejsonoutput.write(jsondumpsoutput)
         uniquejsonoutput.write('\n')
         uniquejsonoutput.close()
-        upload_student_grade(lab_id_name, gradesjsonname)
+        # upload_student_grade(lab_id_name, gradesjsonname)
 
     # Output <labname>.grades.txt
     gradestxtname = os.path.join(MYHOME, "%s.grades.txt" % lab_id_name)
