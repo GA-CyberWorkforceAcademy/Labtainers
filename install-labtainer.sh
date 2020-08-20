@@ -35,16 +35,17 @@ read -p "This script will reboot the system when done, press enter to continue"
 #
 target=~/.bashrc
 grep ":./bin:" $target | grep PATH >>/dev/null
-result=$?
 if [[ result -ne 0 ]];then
    here=`pwd`
    cat <<EOT >>$target
    if [[ ":\$PATH:" != *":./bin:"* ]]; then 
        export PATH="\${PATH}:./bin:$here/trunk/scripts/designer/bin"
-       export LABTAINER_DIR=$(pwd)/trunk
+       export LABTAINER_DIR=$here/trunk
    fi
 EOT
 fi
+
+echo "LABTAINER_DIR=$PWD/trunk" >> ~/.bashrc
 
 if [ ! -h labtainer-student ]; then ln -s trunk/scripts/labtainer-student; fi
 if [ ! -h labtainer-instructor ]; then ln -s trunk/scripts/labtainer-instructor; fi
@@ -62,7 +63,7 @@ if [[ -z "$1" ]]; then
 else
     distrib=$1
 fi
-RESULT=0
+
 case "$distrib" in
     Ubuntu)
         echo is ubuntu
@@ -92,6 +93,7 @@ case "$distrib" in
         fi
         exit 1
 esac
+RESULT=0
 if [[ "$RESULT" -eq 0 ]]; then
     /usr/bin/newgrp docker <<EONG
     /usr/bin/newgrp $USER 
@@ -99,7 +101,7 @@ if [[ "$RESULT" -eq 0 ]]; then
 EONG
     sudo ./dns-add.py
     ./getinfo.py
-    sudo reboot
+#    sudo reboot
 else
     echo "There was a problem with the installation."
 fi
