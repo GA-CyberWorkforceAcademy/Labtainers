@@ -35,7 +35,6 @@ def getAssignments():
     assignment_dict2 = [d.get('id') for d in assignment_data]
     global assignment_data_dict
     assignment_data_dict = dict(zip(assignment_dict, assignment_dict2))
-    print(assignment_data_dict)
     return assignment_data_dict
 
 def getAssignmentID():
@@ -47,7 +46,6 @@ def getAssignmentID():
     # Clean up output for user email
     activity_name = activity_name.replace('_at_','@')
     activity_name = activity_name.split('.')[2]
-    print(activity_name)
     assignment_id = ""
     if activity_name in assignment_data_dict:
         assignment_id = assignment_data_dict[activity_name]
@@ -94,16 +92,12 @@ try:
         for json_file in files:
             activity_file = os.path.join(root, json_file)
             if activity_file.endswith('.json'):
-                print(activity_file)
                 # Determine user Email
                 user_email = parseUserName()
-                print(user_email)
                 # Determine UserID from Canvas API Call
                 user_id = getUserID()
-                print(user_id)
                 # Determine assignment ID
                 assignment_id = getAssignmentID()
-                print(assignment_id)
                 # Grade Assignment
                 grade_pts = gradeAssignment()
                 # Check for existing grade and push grade to assignment data if equal to 100
