@@ -81,7 +81,14 @@ def main():
         servers = current_lab.get('servers')        
         labutils.StopLab(lab_path, False, servers=servers, clone_count=clone_count)
         current_lab.clear()
-
+        current_dir = os.getcwd()
+        grade_dir = '../labtainer-instructor'
+        os.chdir(grade_dir)
+        subprocess.call('gradelab {}'.format(labname), shell=True)
+        os.chdir(current_dir)
+    print(os.getcwd())
+    subprocess.call('python3 ../labtainer-instructor/assess_bin/json_upload.py', shell=True)
+    
     return 0
 
 if __name__ == '__main__':
