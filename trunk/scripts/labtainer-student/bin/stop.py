@@ -36,6 +36,7 @@ labs will be stopped.
 
 import sys
 import os
+import subprocess
 import labutils
 import logging
 import LabtainerLogging
