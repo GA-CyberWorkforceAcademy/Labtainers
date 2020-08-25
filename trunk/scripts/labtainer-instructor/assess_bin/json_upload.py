@@ -49,7 +49,7 @@ def getAssignmentID():
     assignment_id = ""
     if activity_name in assignment_data_dict:
         assignment_id = assignment_data_dict[activity_name]
-    return assignment_id
+    return assignment_id, activity_name
   
 def gradeAssignment():
     # Parse activity for grade information
@@ -75,12 +75,12 @@ def checkGradeExists():
     get_assignments = requests.get('https://gacybercenter.instructure.com/api/v1/courses/{}/assignments/{}/submissions/{}'.format(course_id, assignment_id, user_id), headers=auth_header)
     graded_data = json.loads(get_assignments.text)
     grade_exists = ''
-    for key, value in graded_data.items():
-        if key == 'grade' and value == '100':
-            grade_exists = True
-        else:
-            grade_exists = False
-            return grade_exists
+    grade = graded_data.get('grade')
+    if grade == '100':
+        grade_exists = True
+    else:
+        grade_exists = False
+    return grade, grade_exists
 
 # Pull current assignments from Canvas and create a dictionary for the values
 getAssignments()
@@ -97,12 +97,19 @@ try:
                 # Determine UserID from Canvas API Call
                 user_id = getUserID()
                 # Determine assignment ID
-                assignment_id = getAssignmentID()
+                assignment_data = getAssignmentID()
+                assignment_id = assignment_data[0]
+                assignment_name = assignment_data[1]
                 # Grade Assignment
                 grade_pts = gradeAssignment()
                 # Check for existing grade and push grade to assignment data if equal to 100
-                if (checkGradeExists() != True) and (grade_pts == 100):
+                grade_query = checkGradeExists()
+                grade_exists = grade_query[1]
+                grade = grade_query[0]
+                if (grade_exists != True) and (grade_pts == 100):
                     uploadGrade()
-                    print("All activities graded")
+                    print('{} assignment with a grade of {} submitted!'.format(assignment_name, grade_pts))
+                else:
+                    print('{} assignment has already been submitted with a grade of {}!'.format(assignment_name, grade))
 except:
     print("Exception Occured: No JSON files in student directory or lab naming convention is wrong, nothing to grade")
