@@ -87,7 +87,6 @@ def main():
         os.chdir(grade_dir)
         subprocess.call('gradelab {}'.format(labname), shell=True)
         os.chdir(current_dir)
-    print(os.getcwd())
     subprocess.call('python3 ../labtainer-instructor/assess_bin/json_upload.py', shell=True)
     
     return 0
