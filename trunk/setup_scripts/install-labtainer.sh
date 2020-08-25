@@ -43,6 +43,7 @@ if [[ result -ne 0 ]];then
        export PATH="\${PATH}:./bin:../scripts/designer/bin"
        export LABTAINER_DIR=$pwd
    fi
+   cd ~/Desktop/labtainer-student
 EOT
 fi
 
