@@ -57,11 +57,11 @@ def gradeAssignment():
         activity_data = json.load(read_json)
     dict_name = list(activity_data.keys())[0]
     grade_dict = activity_data['{}'.format(dict_name)]['grades']
-    if False in grade_dict.values():
-        grade_pts = 0
-        return grade_pts
-    elif True in grade_dict.values():
+    if True in grade_dict.values():
         grade_pts = 100
+        return grade_pts
+    else:
+        grade_pts = 0
         return grade_pts
 
 def uploadGrade():
