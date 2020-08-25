@@ -1,10 +1,11 @@
 import os
 import requests
 import json
+import getpass
 
 course_id = '164'
 access_token = '15514~3FyLzah7WZHlhGDqt0Pw0Y8hMkgLmsf88X96BcunyuFPZrz1svNMegsF5cudnkiO'
-working_dir = os.path.join(os.path.expanduser('~'), 'Desktop', 'GTA')
+working_dir = '/home/{}/labtainer_xfer'.format(getpass.getuser())
 auth_header = {'Authorization': 'Bearer {}'.format(access_token)}
 
 
@@ -34,6 +35,7 @@ def getAssignments():
     assignment_dict2 = [d.get('id') for d in assignment_data]
     global assignment_data_dict
     assignment_data_dict = dict(zip(assignment_dict, assignment_dict2))
+    print(assignment_data_dict)
     return assignment_data_dict
 
 def getAssignmentID():
@@ -45,6 +47,7 @@ def getAssignmentID():
     # Clean up output for user email
     activity_name = activity_name.replace('_at_','@')
     activity_name = activity_name.split('.')[2]
+    print(activity_name)
     assignment_id = ""
     if activity_name in assignment_data_dict:
         assignment_id = assignment_data_dict[activity_name]
@@ -77,30 +80,35 @@ def checkGradeExists():
     for key, value in graded_data.items():
         if key == 'grade' and value == '100':
             grade_exists = True
+        else:
+            grade_exists = False
             return grade_exists
 
-# Pull current assignments fron Canvas and create a dictionary for the values
+# Pull current assignments from Canvas and create a dictionary for the values
 getAssignments()
 
 # Loop through json files in the assignment directory
+
 try:
-    with os.scandir(working_dir) as directory:
-        for assignment_file in directory:
-            ext = os.path.splitext(assignment_file)[-1].lower()
-            if ext == '.json':
-                activity_file = os.path.join(working_dir, assignment_file)
+    for root, dirs, files in os.walk(working_dir):
+        for json_file in files:
+            activity_file = os.path.join(root, json_file)
+            if activity_file.endswith('.json'):
+                print(activity_file)
                 # Determine user Email
                 user_email = parseUserName()
+                print(user_email)
                 # Determine UserID from Canvas API Call
                 user_id = getUserID()
+                print(user_id)
                 # Determine assignment ID
                 assignment_id = getAssignmentID()
+                print(assignment_id)
                 # Grade Assignment
                 grade_pts = gradeAssignment()
-                
+                # Check for existing grade and push grade to assignment data if equal to 100
                 if (checkGradeExists() != True) and (grade_pts == 100):
                     uploadGrade()
-    print("All activities graded")     
+                    print("All activities graded")
 except:
-    print("Exception Occured: No JSON files in student directory, nothing to grade")
-
+    print("Exception Occured: No JSON files in student directory or lab naming convention is wrong, nothing to grade")
