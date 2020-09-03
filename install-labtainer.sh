@@ -41,7 +41,7 @@ if [[ result -ne 0 ]];then
    cat <<EOT >>$target
    if [[ ":\$PATH:" != *":./bin:"* ]]; then 
        export PATH="\${PATH}:./bin:$here/trunk/scripts/designer/bin"
-       export LABTAINER_DIR=$PWD/trunk
+       export LABTAINER_DIR="$here/trunk"
    fi
 EOT
 fi
@@ -51,7 +51,7 @@ if [ ! -h labtainer-instructor ]; then ln -s trunk/scripts/labtainer-instructor;
 # add link to update script
 #full=`realpath trunk/setup_scripts/update-labtainer.sh`
 #ln -sf $full trunk/scripts/labtainer-student/bin/update-labtainer.sh
-cd trunk/setup_scripts
+#cd trunk/setup_scripts
 found_distrib=`cat /etc/*-release | grep "^DISTRIB_ID" | awk -F "=" '{print $2}'`
 if [[ -z "$1" ]]; then
     if [[ -z "$found_distrib" ]]; then
@@ -66,21 +66,21 @@ RESULT=0
 case "$distrib" in
     Ubuntu)
         echo is ubuntu
-        ./install-docker-ubuntu.sh
+        ./trunk/setup_scipts/install-docker-ubuntu.sh
         RESULT=$?
         ;;
     Debian|\"Debian*)
         echo is debian
-        ./install-docker-debian.sh
+        ./trunk/setup_scripts/install-docker-debian.sh
         RESULT=$?
         ;;
     Fedora)
         echo is fedora
-        ./install-docker-fedora.sh
+        ./trunk/setup_scripts/install-docker-fedora.sh
         ;;
     Centos)
         echo is centos
-        ./install-docker-centos.sh
+        ./trunk/setup_scripts/install-docker-centos.sh
         RESULT=$?
         ;;
     *)
@@ -95,11 +95,13 @@ esac
 if [[ "$RESULT" -eq 0 ]]; then
     /usr/bin/newgrp docker <<EONG
     /usr/bin/newgrp $USER 
-    source ./pull-all.sh
+    source ./trunk/setup_scripts/pull-all.sh
 EONG
-    sudo ./dns-add.py
-    ./getinfo.py
+    sudo ./trunk/setup_scripts/dns-add.py
+    ./trunk/setup_scripts/getinfo.py
 #    sudo reboot
 else
     echo "There was a problem with the installation."
 fi
+ln -s /trunk/scripts/labtainer-student /home/$USER/Desktop
+ln -s /trunk/script/labtainer-student/labtainer-student.pdf /home/$USER/Desktop
