@@ -42,6 +42,7 @@ if [[ result -ne 0 ]];then
    if [[ ":\$PATH:" != *":./bin:"* ]]; then 
        export PATH="\${PATH}:./bin:$here/trunk/scripts/designer/bin"
        export LABTAINER_DIR="$here/trunk"
+       cd /home/$USER/Desktop/labtainer-student
    fi
 EOT
 fi
@@ -66,7 +67,7 @@ RESULT=0
 case "$distrib" in
     Ubuntu)
         echo is ubuntu
-        ./trunk/setup_scipts/install-docker-ubuntu.sh
+        ./trunk/setup_scripts/install-docker-ubuntu.sh
         RESULT=$?
         ;;
     Debian|\"Debian*)
@@ -103,5 +104,5 @@ EONG
 else
     echo "There was a problem with the installation."
 fi
-ln -s /trunk/scripts/labtainer-student /home/$USER/Desktop
-ln -s /trunk/script/labtainer-student/labtainer-student.pdf /home/$USER/Desktop
+ln -s $PWD/trunk/scripts/labtainer-student /home/$USER/Desktop
+ln -s $PWD/trunk/docs/student/labtainer-student.pdf /home/$USER/Desktop
