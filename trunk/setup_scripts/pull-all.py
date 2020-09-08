@@ -4,7 +4,7 @@ import sys
 import argparse
 labtainer_dir=os.getenv('LABTAINER_DIR')
 if labtainer_dir is None or not os.path.isdir(labtainer_dir):
-    labtainer_dir = '/home/student/labtainer/trunk'
+    labtainer_dir = '/home/gta_user/Labtainers/trunk'
 sys.path.append(f'{labtainer_dir}/scripts/labtainer-student/bin')
 import labutils
 import ParseLabtainerConfig
