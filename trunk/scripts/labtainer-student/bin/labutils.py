@@ -1282,8 +1282,12 @@ def GetUserEmail(quiet_start):
         eprompt = 'Please enter your e-mail address registered with Canvas: '
         prev_email = getLastEmail()
         if prev_email is not None:
-            eprompt = eprompt+"(if not [%s]) - " % prev_email
-
+            confirm = str(input(f'Is your canvas registered email address {prev_email} (y/n)?')).lower().strip()
+            if confirm != 'y':
+                user_input = input(eprompt)
+                user_email = user_input
+            else:
+                user_email = prev_email
              #checks if quiet_start is true
         if quiet_start and prev_email is not None:
             confirm = str(input(f'Is your canvas registered email address {prev_email} (y/n)?')).lower().strip()
