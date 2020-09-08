@@ -1309,14 +1309,14 @@ def GetUserEmail(quiet_start):
         if user_email is not None:
             #user_email = input(eprompt)
             if len(user_email.strip()) == 0:
-                if prev_email is None:
-                    print('You have provided an empty email address, which may cause your results to not be graded.')
-                    if sys.version_info >=(3,0):
-                        confirm = str(input('Use the empty address? (y/n)')).lower().strip()
-                    else:
-                        confirm = str(raw_input('Use the empty address? (y/n)')).lower().strip()
-                    if confirm != 'y':
-                        user_email = None
+                # if prev_email is None:
+                print('You have provided an empty email address, which may cause your results to not be graded.')
+                if sys.version_info >=(3,0):
+                    confirm = str(input('Use the empty address? (y/n)')).lower().strip()
+                else:
+                    confirm = str(raw_input('Use the empty address? (y/n)')).lower().strip()
+                if confirm != 'y':
+                    user_email = None
                 # else:
                 #     user_email = prev_email
             else:
