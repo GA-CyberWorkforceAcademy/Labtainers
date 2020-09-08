@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3 ./pull-all.py
+python3 $PWD/trunk/setup_scripts/pull-all.py

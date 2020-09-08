@@ -19,7 +19,7 @@ parser.add_argument('-m', '--metasploit', action='store_true', default=False, he
 args = parser.parse_args()
 
 lab_config_file = os.path.join('../config', 'labtainer.config')
-labutils.logger = LabtainerLogging.LabtainerLogging("pull.log", 'pull-all', "../config/labtainer.config")
+labutils.logger = LabtainerLogging.LabtainerLogging("pull.log", 'pull-all', f'{labtainer_dir}/config/labtainer.config')
 logger = labutils.logger
 labtainer_config = ParseLabtainerConfig.ParseLabtainerConfig(lab_config_file, logger)
 test_registry = False
