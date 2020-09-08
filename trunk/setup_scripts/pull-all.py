@@ -5,7 +5,7 @@ import argparse
 labtainer_dir=os.getenv('LABTAINER_DIR')
 if labtainer_dir is None or not os.path.isdir(labtainer_dir):
     labtainer_dir = '/home/student/labtainer/trunk'
-sys.path.append(os.path.join(labtainer_dir, 'scripts/labtainer-student/bin'))
+sys.path.append(f'{labtainer_dir}/scripts/labtainer-student/bin')
 import labutils
 import ParseLabtainerConfig
 import LabtainerLogging
@@ -18,8 +18,8 @@ parser.add_argument('-t', '--test_registry', action='store_true', default=False,
 parser.add_argument('-m', '--metasploit', action='store_true', default=False, help='include metasploitable and kali images')
 args = parser.parse_args()
 
-lab_config_file = os.path.join('../config', 'labtainer.config')
-labutils.logger = LabtainerLogging.LabtainerLogging("pull.log", 'pull-all', "../config/labtainer.config")
+lab_config_file = os.path.join(f'{labtainer_dir}/config', 'labtainer.config')
+labutils.logger = LabtainerLogging.LabtainerLogging("pull.log", 'pull-all', f'{labtainer_dir}/config/labtainer.config')
 logger = labutils.logger
 labtainer_config = ParseLabtainerConfig.ParseLabtainerConfig(lab_config_file, logger)
 test_registry = False
