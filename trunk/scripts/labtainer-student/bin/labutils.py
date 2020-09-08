@@ -1279,24 +1279,14 @@ def GetUserEmail(quiet_start):
     while user_email is None:
         done = True
         # Prompt user for e-mail address
-        eprompt = str(input(f'Please enter your e-mail address registered with Canvas: ')).lower()
-        #prev_email = getLastEmail()
-        # if prev_email is not None:
-        user_input = input(eprompt)
-        confirm = str(input(f'Is your canvas registered email address {user_input} (y/n)?')).lower().strip()
-        if confirm != 'y':
-            user_input = input(eprompt)
-            user_email = user_input
-            # else:
-            #     user_email = prev_email
+        eprompt = 'Please enter your e-mail address: '
+        prev_email = getLastEmail()
+        if prev_email is not None:
+            eprompt = eprompt+" [%s]" % prev_email
+
              #checks if quiet_start is true
-        # if quiet_start and prev_email is not None:
-        #     confirm = str(input(f'Is your canvas registered email address {user_input} (y/n)?')).lower().strip()
-        #     if confirm != 'y':
-        #         user_input = input(eprompt)
-        #         user_email = user_input
-            # else:
-            #     user_email = prev_email
+        if quiet_start and prev_email is not None:
+            user_email = prev_email
         else:
             if sys.version_info >=(3,0):
                 user_input = input(eprompt)
@@ -1309,16 +1299,16 @@ def GetUserEmail(quiet_start):
         if user_email is not None:
             #user_email = input(eprompt)
             if len(user_email.strip()) == 0:
-                # if prev_email is None:
-                print('You have provided an empty email address, which may cause your results to not be graded.')
-                if sys.version_info >=(3,0):
-                    confirm = str(input('Use the empty address? (y/n)')).lower().strip()
+                if prev_email is None:
+                    print('You have provided an empty email address, which may cause your results to not be graded.')
+                    if sys.version_info >=(3,0):
+                        confirm = str(input('Use the empty address? (y/n)')).lower().strip()
+                    else:
+                        confirm = str(raw_input('Use the empty address? (y/n)')).lower().strip()
+                    if confirm != 'y':
+                        user_email = None
                 else:
-                    confirm = str(raw_input('Use the empty address? (y/n)')).lower().strip()
-                if confirm != 'y':
-                    user_email = None
-                # else:
-                #     user_email = prev_email
+                    user_email = prev_email
             else:
                 putLastEmail(user_email)
     return user_email
