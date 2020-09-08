@@ -13,7 +13,6 @@ item2 = item2.encode('utf8')
 item2 = base64.b64decode(item2)
 f = Fernet(item2)
 access_token = f.decrypt(item1).decode('utf8')
-print(access_token)
 working_dir = '/home/{}/labtainer_xfer'.format(getpass.getuser())
 auth_header = {'Authorization': 'Bearer {}'.format(access_token)}
 
