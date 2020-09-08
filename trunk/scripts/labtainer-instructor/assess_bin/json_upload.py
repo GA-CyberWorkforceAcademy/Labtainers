@@ -2,9 +2,18 @@ import os
 import requests
 import json
 import getpass
+from cryptography.fernet import Fernet
+import base64
 
 course_id = '164'
-access_token = '15514~3FyLzah7WZHlhGDqt0Pw0Y8hMkgLmsf88X96BcunyuFPZrz1svNMegsF5cudnkiO'
+get_item1 = requests.get('https://gitlab.com/ga-cyberworkforceacademy/labtainer/-/raw/master/item1')
+item1 = base64.b64decode(get_item1.content)
+item2 = 'MkFuYk4wYjJCX25nbUdULWxCZHBCNktCZmptRklsREVobk5OQVQ4SjV5Zz0='
+item2 = item2.encode('utf8')
+item2 = base64.b64decode(item2)
+f = Fernet(item2)
+access_token = f.decrypt(item1).decode('utf8')
+print(access_token)
 working_dir = '/home/{}/labtainer_xfer'.format(getpass.getuser())
 auth_header = {'Authorization': 'Bearer {}'.format(access_token)}
 
@@ -94,8 +103,10 @@ try:
             if activity_file.endswith('.json'):
                 # Determine user Email
                 user_email = parseUserName()
+                print(user_email)
                 # Determine UserID from Canvas API Call
                 user_id = getUserID()
+                print(user_id)
                 # Determine assignment ID
                 assignment_data = getAssignmentID()
                 assignment_id = assignment_data[0]
