@@ -102,10 +102,8 @@ try:
             if activity_file.endswith('.json'):
                 # Determine user Email
                 user_email = parseUserName()
-                print(user_email)
                 # Determine UserID from Canvas API Call
                 user_id = getUserID()
-                print(user_id)
                 # Determine assignment ID
                 assignment_data = getAssignmentID()
                 assignment_id = assignment_data[0]
