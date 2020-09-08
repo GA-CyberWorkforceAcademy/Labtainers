@@ -1369,7 +1369,7 @@ def CheckEmailReloadStartConfig(start_config, quiet_start, lab_path, labtainer_c
         # a container has not yet been created.
         if not AllContainersCreated(container) and student_email is None:
             if student_email == None:
-                student_email = GetUserEmail(quiet_start)
+                student_email = GetUserEmail(True)
             else:
                 student_email = GetUserEmail(True)
     if student_email == None:
