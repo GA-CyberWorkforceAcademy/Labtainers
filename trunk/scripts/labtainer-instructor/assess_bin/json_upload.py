@@ -53,7 +53,7 @@ def getAssignmentID():
     activity_name = list(activity_name.keys())[0]
     # Clean up output for user email
     activity_name = activity_name.replace('_at_','@')
-    activity_name = activity_name.split('.')[2]
+    activity_name = activity_name.rsplit('.', 1)[1]
     assignment_id = ""
     if activity_name in assignment_data_dict:
         assignment_id = assignment_data_dict[activity_name]
