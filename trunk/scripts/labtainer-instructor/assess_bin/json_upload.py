@@ -95,29 +95,28 @@ getAssignments()
 
 # Loop through json files in the assignment directory
 
-try:
-    for root, dirs, files in os.walk(working_dir):
-        for json_file in files:
-            activity_file = os.path.join(root, json_file)
-            if activity_file.endswith('.json'):
-                # Determine user Email
-                user_email = parseUserName()
-                # Determine UserID from Canvas API Call
-                user_id = getUserID()
-                # Determine assignment ID
-                assignment_data = getAssignmentID()
-                assignment_id = assignment_data[0]
-                assignment_name = assignment_data[1]
-                # Grade Assignment
-                grade_pts = gradeAssignment()
-                # Check for existing grade and push grade to assignment data if equal to 100
-                grade_query = checkGradeExists()
-                grade_exists = grade_query[1]
-                grade = grade_query[0]
-                if (grade_exists != True) and (grade_pts == 100):
-                    uploadGrade()
-                    print('{} assignment with a grade of {} submitted!'.format(assignment_name, grade_pts))
-                else:
-                    print('{} assignment has already been submitted with a grade of {}!'.format(assignment_name, grade))
-except:
-    print("Exception Occured: No JSON files in student directory or lab naming convention is wrong, nothing to grade")
+
+for root, dirs, files in os.walk(working_dir):
+    for json_file in files:
+        activity_file = os.path.join(root, json_file)
+        if activity_file.endswith('.json'):
+            # Determine user Email
+            user_email = parseUserName()
+            # Determine UserID from Canvas API Call
+            user_id = getUserID()
+            # Determine assignment ID
+            assignment_data = getAssignmentID()
+            assignment_id = assignment_data[0]
+            assignment_name = assignment_data[1]
+            # Grade Assignment
+            grade_pts = gradeAssignment()
+            # Check for existing grade and push grade to assignment data if equal to 100
+            grade_query = checkGradeExists()
+            grade_exists = grade_query[1]
+            grade = grade_query[0]
+            if (grade_exists != True) and (grade_pts == 100):
+                uploadGrade()
+                print('{} assignment with a grade of {} submitted!'.format(assignment_name, grade_pts))
+            else:
+                print('{} assignment has already been submitted with a grade of {}!'.format(assignment_name, grade))
+
