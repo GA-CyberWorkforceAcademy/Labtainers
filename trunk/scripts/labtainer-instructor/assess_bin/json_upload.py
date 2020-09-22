@@ -111,12 +111,15 @@ for root, dirs, files in os.walk(working_dir):
             # Grade Assignment
             grade_pts = gradeAssignment()
             # Check for existing grade and push grade to assignment data if equal to 100
-            grade_query = checkGradeExists()
-            grade_exists = grade_query[1]
-            grade = grade_query[0]
-            if (grade_exists != True) and (grade_pts == 100):
-                uploadGrade()
-                print('{} assignment with a grade of {} submitted!'.format(assignment_name, grade_pts))
-            else:
-                print('{} assignment has already been submitted with a grade of {}!'.format(assignment_name, grade))
-
+            try:
+                grade_query = checkGradeExists()
+                grade_exists = grade_query[1]
+                grade = grade_query[0]
+                if (grade_exists != True) and (grade_pts == 100):
+                    uploadGrade()
+                    print('{} assignment with a grade of {} submitted!'.format(assignment_name, grade_pts))
+                else:
+                    print('{} assignment has already been submitted with a grade of {}!'.format(assignment_name, grade))
+            except:
+                print(f"{assignment_name} doesn't exist on Canvas as a graded item")
+                pass
