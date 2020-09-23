@@ -24,8 +24,9 @@ def parseUserName():
     user_name = list(user_name.keys())[0]
     # Clean up output for user email
     user_name = user_name.replace('_at_','@')
-    user_name = user_name.split('.', 2)[:1]
+    # user_name = user_name.split('.', 2)[:1]
     user_email= "".join(user_name)
+    user_email = user_email.split('@')[0]
     return user_email
 
 def getUserID():
