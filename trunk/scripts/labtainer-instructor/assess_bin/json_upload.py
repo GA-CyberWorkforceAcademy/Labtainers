@@ -87,6 +87,8 @@ def checkGradeExists():
     grade = graded_data.get('grade')
     if grade == '100':
         grade_exists = True
+    elif grade == '0':
+        grade_exists = True
     else:
         grade_exists = False
     return grade, grade_exists
@@ -102,15 +104,18 @@ for root, dirs, files in os.walk(working_dir):
         activity_file = os.path.join(root, json_file)
         if activity_file.endswith('.json'):
             # Determine user Email
-            user_email = parseUserName()
+            try:
+                user_email = parseUserName()
             # Determine UserID from Canvas API Call
-            user_id = getUserID()
+                user_id = getUserID()
             # Determine assignment ID
-            assignment_data = getAssignmentID()
-            assignment_id = assignment_data[0]
-            assignment_name = assignment_data[1]
+                assignment_data = getAssignmentID()
+                assignment_id = assignment_data[0]
+                assignment_name = assignment_data[1]
             # Grade Assignment
-            grade_pts = gradeAssignment()
+                grade_pts = gradeAssignment()
+            except:
+                pass
             # Check for existing grade and push grade to assignment data if equal to 100
             try:
                 grade_query = checkGradeExists()
@@ -119,6 +124,12 @@ for root, dirs, files in os.walk(working_dir):
                 if (grade_exists != True) and (grade_pts == 100):
                     uploadGrade()
                     print('{} assignment with a grade of {} submitted!'.format(assignment_name, grade_pts))
+                elif (grade_exists == True) and (grade_pts != 100):
+                    uploadGrade()
+                    print(f'{assignment_name} with a grade of {grade_pts} currently exists, try the lab again for a better grade!')
+                elif (grade_exists == True) and (grade == 0) and (grade_pts == 100):
+                    uploadGrade()
+                    print(f'{assignment_name} with a grade of {grade_pts} has been updated!')
                 else:
                     print('{} assignment has already been submitted with a grade of {}!'.format(assignment_name, grade))
             except:
